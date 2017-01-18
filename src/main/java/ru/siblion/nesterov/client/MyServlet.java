@@ -14,19 +14,19 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
-                      HttpServletResponse response) throws ServletException, IOException {
+                         HttpServletResponse response) throws ServletException, IOException {
         User user = new User("Alexander", "passwd");
         request.setAttribute("user", user);
         String username = request.getParameter("name");
         System.out.println(username);
         request.setAttribute("username", username);
-        //response.sendRedirect("index.jsp");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
     }
 
-    public void doPost(HttpServletRequest request,
-                      HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response) throws ServletException, IOException {
 
     }
 

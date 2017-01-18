@@ -60,7 +60,51 @@
 
         <% System.out.println("username  " + request.getAttribute("username"));%>
     </div>
-
+    <div class="row">
+        <div class="col-md-6">
+            <p>String: </p>
+            <input type="text" class="form-control" placeholder="String or regular expression">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Date intervals: </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" id="dateFromDiv"></div>
+        <div class="col-md-6" id="dateToDiv"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-default" id="addDateIntervalButton">Add date interval</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Location for search: </p>
+            <input type="text" class="form-control" placeholder="Domain, cluster or server">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>File format: </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-default" id="startLogSearchButton">Search</button>
+        </div>
+    </div>
 </div><!-- /.container -->
 
 <!-- Bootstrap core JavaScript
@@ -68,6 +112,9 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+<!-- Скрипт должен выполняться после того, как загрузилась страница -->
+<script src="js/index.js"></script>
 
 </body>
 </html>
