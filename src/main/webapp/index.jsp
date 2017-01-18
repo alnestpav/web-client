@@ -52,10 +52,13 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <h1>Log Reader</h1>
+        <p class="lead">for WebLogic server<br>Export</p>
         <p>Привет, <%= request.getParameter("name") %>!</p>
         <p>String: <%= request.getAttribute("username") %></p>
+        <% System.out.println("name " + request.getAttribute("name"));%>
+
+        <% System.out.println("username  " + request.getAttribute("username"));%>
     </div>
 
 </div><!-- /.container -->
