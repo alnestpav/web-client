@@ -29,7 +29,17 @@ public class MyServlet extends HttpServlet {
                           HttpServletResponse response) throws ServletException, IOException {
         System.out.println("POST");
         String string = request.getParameter("string");
+        String location = request.getParameter("location");
+        String dateFrom = request.getParameter("dateFrom");
+        String dateTo = request.getParameter("dateTo");
+        String fileFormat = request.getParameter("fileFormat");
+
         System.out.println(string);
+        System.out.println(location);
+        System.out.println(dateFrom);
+        System.out.println(dateTo);
+        System.out.println(fileFormat);
+
     }
 
 }

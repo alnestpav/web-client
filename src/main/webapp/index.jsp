@@ -83,12 +83,16 @@
         <input type="text" class="form-control" id="locationInput" name="location" placeholder="Domain, cluster or server">
 
         <label for="FileFormatSelect">File format</label>
+
+        <!-- Переписать, чтобы форматы брались из перечисления FileFormat -->
         <select class="form-control" id="FileFormatSelect" name="fileFormat">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            <option>no</option>
+            <option>doc</option>
+            <option>html</option>
+            <option>log</option>
+            <option>pdf</option>
+            <option>rtf</option>
+            <option>xml</option>
         </select>
         <button type="submit" class="btn btn-default" id="startLogSearchButton">Search</button>
     </form>
