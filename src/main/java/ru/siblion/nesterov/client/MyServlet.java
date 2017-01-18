@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 
 /**
@@ -30,14 +31,15 @@ public class MyServlet extends HttpServlet {
         System.out.println("POST");
         String string = request.getParameter("string");
         String location = request.getParameter("location");
-        String dateFrom = request.getParameter("dateFrom");
-        String dateTo = request.getParameter("dateTo");
+        String dateFromString = request.getParameter("dateFrom");
+        String dateToString = request.getParameter("dateTo");
         String fileFormat = request.getParameter("fileFormat");
+
 
         System.out.println(string);
         System.out.println(location);
-        System.out.println(dateFrom);
-        System.out.println(dateTo);
+        System.out.println(dateFromString);
+        System.out.println(dateToString);
         System.out.println(fileFormat);
 
     }
