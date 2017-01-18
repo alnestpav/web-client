@@ -60,51 +60,38 @@
 
         <% System.out.println("username  " + request.getAttribute("username"));%>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p>String: </p>
-            <input type="text" class="form-control" placeholder="String or regular expression">
+    <form action="./hello" method="post">
+        <label for="stringInput">String</label>
+        <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
+
+        <div class="row">
+            <div class="col-md-6">
+                <p>Date intervals: </p>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p>Date intervals: </p>
+        <div class="row">
+            <div class="col-md-6" id="dateFromDiv"></div>
+            <div class="col-md-6" id="dateToDiv"></div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6" id="dateFromDiv"></div>
-        <div class="col-md-6" id="dateToDiv"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-default" id="addDateIntervalButton">Add date interval</button>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-default" id="addDateIntervalButton">Add date interval</button>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p>Location for search: </p>
-            <input type="text" class="form-control" placeholder="Domain, cluster or server">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p>File format: </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <select class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </div>
-        <div class="col-md-6">
-            <button type="button" class="btn btn-default" id="startLogSearchButton">Search</button>
-        </div>
-    </div>
+
+        <label for="locationInput">Location for search</label>
+        <input type="text" class="form-control" id="locationInput" name="location" placeholder="Domain, cluster or server">
+
+        <label for="FileFormatSelect">File format</label>
+        <select class="form-control" id="FileFormatSelect" name="fileFormat">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <button type="submit" class="btn btn-default" id="startLogSearchButton">Search</button>
+    </form>
 </div><!-- /.container -->
 
 <!-- Bootstrap core JavaScript
