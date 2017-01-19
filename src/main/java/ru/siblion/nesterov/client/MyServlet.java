@@ -54,9 +54,21 @@ public class MyServlet extends HttpServlet {
         Request clientRequest = new Request();
         clientRequest.setString(string);
         clientRequest.setLocation(location);
-        clientRequest.setFileFormat(FileFormat.fromValue(fileFormatString));
+
+        FileFormat fileFormat = null;
+        if (!fileFormatString.equals("no")) { // потом переписать
+            fileFormat = FileFormat.fromValue(fileFormatString);
+        }
+        clientRequest.setFileFormat(fileFormat);
+
+
         clientRequest.getDateIntervals().add(dateInterval);
         Response clientResponse = service.getListOfLogMessages(clientRequest);
+
+        request.setAttribute("logMessages", clientResponse.getLogMessage()); // почему logMessage, а не logMessages
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        requestDispatcher.forward(request, response);
 
     }
 
