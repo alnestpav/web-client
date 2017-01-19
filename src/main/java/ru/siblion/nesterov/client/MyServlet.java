@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by alexander on 17.01.2017.
@@ -65,7 +64,7 @@ public class MyServlet extends HttpServlet {
 
         clientRequest.getDateIntervals().add(dateInterval);
         Response clientResponse = service.getListOfLogMessages(clientRequest);
-        List<LogMessage> logMessages = clientResponse.getLogMessage();
+        List<LogMessage> logMessages = clientResponse.getLogMessages();
         Object outputFile = clientResponse.getOutputFile();
         System.out.println("OutputFile: " + outputFile);
         if (outputFile != null) { // разобраться почему одновременно outputFile и logMessages существуют!
@@ -73,7 +72,7 @@ public class MyServlet extends HttpServlet {
             request.setAttribute("outputFile", clientResponse.getOutputFile()); // object к string преобразование нужно ли
         } else if (logMessages != null) {
             System.out.println("2");
-            request.setAttribute("logMessages", clientResponse.getLogMessage()); // почему logMessage, а не logMessages
+            request.setAttribute("logMessages", logMessages); //
         } else {
             System.out.println("3");
             try {
@@ -83,10 +82,10 @@ public class MyServlet extends HttpServlet {
             }
         }
 
-
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
-
     }
+
+    private void get
 
 }
