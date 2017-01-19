@@ -101,7 +101,10 @@
                 <p>${logMessage.message}</p>
             </div>
         </c:forEach>
+        <p>${outputFile}</p>
+
     </div>
+
 </div><!-- /.container -->
 
 <!-- Bootstrap core JavaScript
