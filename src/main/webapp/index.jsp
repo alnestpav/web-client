@@ -99,10 +99,8 @@
         <button type="submit" class="btn btn-default" id="startLogSearchButton">Search</button>
     </form>
     <div>
-        <%= request.getAttribute("logMessages") %>
-
         <c:forEach items="${logMessages}" var="logMessage">
-            ${logMessage.date}, ${logMessage.message} <br />
+                <p>${logMessage.message}</p>
         </c:forEach>
     </div>
 </div><!-- /.container -->
