@@ -56,9 +56,6 @@
     <div class="starter-template">
         <h1>Log Reader</h1>
         <p class="lead">for WebLogic server<br>Export</p>
-        <p>Привет, <%= request.getParameter("name") %>!</p>
-        <p>String: <%= request.getAttribute("username") %></p>
-        <% System.out.println("name " + request.getAttribute("name"));%>
 
         <% System.out.println("username  " + request.getAttribute("username"));%>
     </div>
@@ -100,7 +97,9 @@
     </form>
     <div>
         <c:forEach items="${logMessages}" var="logMessage">
+            <div class="log-message">
                 <p>${logMessage.message}</p>
+            </div>
         </c:forEach>
     </div>
 </div><!-- /.container -->

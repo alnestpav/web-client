@@ -5,3 +5,10 @@ body {
     padding: 40px 15px;
     text-align: center;
 }
+
+.log-message {
+    background-color: #eee;
+    border-radius: 6px;
+    padding: 5px;
+    margin-bottom: 30px;
+}
