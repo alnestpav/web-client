@@ -70,6 +70,10 @@ public class MyServlet extends HttpServlet {
         if (outputFile != null) { // разобраться почему одновременно outputFile и logMessages существуют!
             System.out.println("1");
             request.setAttribute("outputFile", clientResponse.getOutputFile()); // object к string преобразование нужно ли
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("http://192.168.0.164:7001/logreader-1.0.1/resources/restWebService/getFile?filename=log-d2017-01-19-16-20-47-380+0300h1831496568.pdf");
+            requestDispatcher.forward(request, response);
+
         } else if (logMessages != null) {
             System.out.println("2");
             request.setAttribute("logMessages", logMessages); //
@@ -86,6 +90,5 @@ public class MyServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    private void get
 
 }
