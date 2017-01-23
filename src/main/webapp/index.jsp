@@ -97,11 +97,11 @@
                     </div>
                 </c:forEach>
             </c:when>
-            <c:otherwise>
+            <c:when test="${logMessages != null && empty logMessages}">
                 <div class="jumbotron">
                     <p class="lead">Нет записей</p>
                 </div>
-            </c:otherwise>
+            </c:when>
         </c:choose>
 
         <c:if test="${fileLink != null}">

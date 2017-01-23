@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,20 +32,18 @@ public class SearchServlet extends HttpServlet {
         System.out.println("POST");
         String string = request.getParameter("string");
         String location = request.getParameter("location");
-        String dateFromString = request.getParameter("dateFrom");
-        String dateToString = request.getParameter("dateTo");
         String fileFormatString = request.getParameter("fileFormat");
+
+        String[] dateFromStrings = request.getParameterValues("dateFrom");
+        String[] dateToStrings = request.getParameterValues("dateTo");
+
 
         System.out.println(string);
         System.out.println(location);
-        System.out.println(dateFromString);
-        System.out.println(dateToString);
+        System.out.println(Arrays.toString(dateFromStrings));
+        System.out.println(Arrays.toString(dateToStrings));
         System.out.println(fileFormatString);
 
-        List<DateInterval> dateIntervals = new ArrayList<>();
-        DateInterval dateInterval = new DateInterval();
-        dateInterval.setDateFrom(dateFromString); // String преобразуется к XMLGregorianCalendar автоматически
-        dateInterval.setDateTo(dateToString);
 
         SoapWebService service = new SoapWebServiceService().getSoapWebServicePort();
 
@@ -52,14 +51,18 @@ public class SearchServlet extends HttpServlet {
         clientRequest.setString(string);
         clientRequest.setLocation(location);
 
+        for (int i = 0; i < dateFromStrings.length; i++) {
+            DateInterval dateInterval = new DateInterval();
+            dateInterval.setDateFrom(dateFromStrings[i]); // String преобразуется к XMLGregorianCalendar автоматически
+            dateInterval.setDateTo(dateToStrings[i]);
+            clientRequest.getDateIntervals().add(dateInterval);
+        }
+
         FileFormat fileFormat = null;
         if (!fileFormatString.equals("no")) { // потом переписать
             fileFormat = FileFormat.fromValue(fileFormatString);
         }
         clientRequest.setFileFormat(fileFormat);
-
-
-        clientRequest.getDateIntervals().add(dateInterval);
 
         Response clientResponse = service.getListOfLogMessages(clientRequest);
 
