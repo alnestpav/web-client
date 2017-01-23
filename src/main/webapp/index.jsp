@@ -52,14 +52,7 @@
 </nav>
 
 <div class="container">
-
-    <div class="starter-template">
-        <h1>Log Reader</h1>
-        <p class="lead">for WebLogic server<br>Export</p>
-
-        <% System.out.println("username  " + request.getAttribute("username"));%>
-    </div>
-    <form action="./hello" method="post">
+    <form action="./search" method="post">
         <label for="stringInput">String</label>
         <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
 
@@ -96,11 +89,21 @@
         <button type="submit" class="btn btn-default" id="startLogSearchButton">Search</button>
     </form>
     <div>
-        <c:forEach items="${logMessages}" var="logMessage">
-            <div class="log-message">
-                <p>${logMessage.message}</p>
-            </div>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${logMessages != null}">
+                <c:forEach items="${logMessages}" var="logMessage">
+                    <div class="log-message">
+                        <p><c:out value="${logMessage.message}" escapeXml="true"></c:out></p>
+                    </div>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <div class="jumbotron">
+                    <p class="lead">Нет записей</p>
+                </div>
+            </c:otherwise>
+        </c:choose>
+
         <c:if test="${fileLink != null}">
             <div class="jumbotron">
                 <p class="lead">Файл успешно создан!</p>

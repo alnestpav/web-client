@@ -44,7 +44,7 @@ public class SearchServlet extends HttpServlet {
         List<DateInterval> dateIntervals = new ArrayList<>();
         DateInterval dateInterval = new DateInterval();
         dateInterval.setDateFrom(dateFromString); // String преобразуется к XMLGregorianCalendar автоматически
-        dateInterval.setDateFrom(dateToString);
+        dateInterval.setDateTo(dateToString);
 
         SoapWebService service = new SoapWebServiceService().getSoapWebServicePort();
 
