@@ -102,6 +102,8 @@
             </div>
         </c:forEach>
         <p>${outputFile}</p>
+        <p>${file}</p>
+        <a class="btn btn-default" href="${file}" role="button">Link</a>
 
     </div>
 

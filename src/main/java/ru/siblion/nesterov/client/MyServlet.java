@@ -7,17 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by alexander on 17.01.2017.
@@ -69,16 +63,22 @@ public class MyServlet extends HttpServlet {
 
 
         clientRequest.getDateIntervals().add(dateInterval);
+
         Response clientResponse = service.getListOfLogMessages(clientRequest);
+
         List<LogMessage> logMessages = clientResponse.getLogMessages();
-        Object outputFile = clientResponse.getOutputFile();
+        String outputFile = (String) clientResponse.getOutputFile();
         System.out.println("OutputFile: " + outputFile);
         if (outputFile != null) { // разобраться почему одновременно outputFile и logMessages существуют!
             System.out.println("1");
-            request.setAttribute("outputFile", clientResponse.getOutputFile()); // object к string преобразование нужно ли
+            request.setAttribute("outputFile", outputFile); // object к string преобразование нужно ли
+            Pattern fileNamePattern = Pattern.compile("\\\\[^\\\\]*$");
+            Matcher fileNameMatcher = fileNamePattern.matcher(outputFile);
+            fileNameMatcher.find();
+            String fileName = fileNameMatcher.group().substring(1); // получить имя файла, убрать первый символ '\'
+            System.out.println("FILE NAME " + fileName);
 
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("http://192.168.0.164:7001/logreader-1.0.1/resources/restWebService/getFile?filename=log-d2017-01-19-16-20-47-380+0300h1831496568.pdf");
-            requestDispatcher.forward(request, response);
+            request.setAttribute("file", "download?fileName=" + fileName);
 
         } else if (logMessages != null) {
             System.out.println("2");
