@@ -16,14 +16,11 @@ import java.util.regex.Pattern;
 /**
  * Created by alexander on 17.01.2017.
  */
-public class MyServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("name");
-        System.out.println(username);
-        request.setAttribute("username", username);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -68,30 +65,21 @@ public class MyServlet extends HttpServlet {
 
         List<LogMessage> logMessages = clientResponse.getLogMessages();
         String outputFile = (String) clientResponse.getOutputFile();
-        System.out.println("OutputFile: " + outputFile);
         if (outputFile != null) { // разобраться почему одновременно outputFile и logMessages существуют!
-            System.out.println("1");
-            request.setAttribute("outputFile", outputFile); // object к string преобразование нужно ли
             Pattern fileNamePattern = Pattern.compile("\\\\[^\\\\]*$");
             Matcher fileNameMatcher = fileNamePattern.matcher(outputFile);
             fileNameMatcher.find();
             String fileName = fileNameMatcher.group().substring(1); // получить имя файла, убрать первый символ '\'
-            System.out.println("FILE NAME " + fileName);
-
-            request.setAttribute("file", "download?fileName=" + fileName);
-
+            request.setAttribute("fileLink", "download?fileName=" + fileName);
         } else if (logMessages != null) {
-            System.out.println("2");
             request.setAttribute("logMessages", logMessages); //
         } else {
-            System.out.println("3");
             try {
                 throw new Exception();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
 

@@ -101,9 +101,13 @@
                 <p>${logMessage.message}</p>
             </div>
         </c:forEach>
-        <p>${outputFile}</p>
-        <p>${file}</p>
-        <a class="btn btn-default" href="${file}" role="button">Link</a>
+        <c:if test="${fileLink != null}">
+            <div class="jumbotron">
+                <p class="lead">Файл успешно создан!</p>
+                <a class="btn btn-lg btn-success" href="${fileLink}" role="button">Скачать</a>
+            </div>
+        </c:if>
+
 
     </div>
 
