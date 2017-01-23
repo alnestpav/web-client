@@ -17,4 +17,14 @@
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>downloadFileServlet</servlet-name>
+        <servlet-class>ru.siblion.nesterov.client.DownloadFileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>downloadFileServlet</servlet-name>
+        <url-pattern>/download</url-pattern>
+    </servlet-mapping>
+
 </web-app>
