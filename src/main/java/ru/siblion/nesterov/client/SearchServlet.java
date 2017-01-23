@@ -50,16 +50,12 @@ public class SearchServlet extends HttpServlet {
         Request clientRequest = new Request();
         clientRequest.setString(string);
         clientRequest.setLocation(location);
-        if (dateFromStrings == null || dateToStrings == null) { // если интервалы дат отсутствуют, то добавить в запрос пустой интервал
+
+        for (int i = 0; i < dateFromStrings.length; i++) {
             DateInterval dateInterval = new DateInterval();
+            dateInterval.setDateFrom(dateFromStrings[i]); // String преобразуется к XMLGregorianCalendar автоматически
+            dateInterval.setDateTo(dateToStrings[i]);
             clientRequest.getDateIntervals().add(dateInterval);
-        } else {
-            for (int i = 0; i < dateFromStrings.length; i++) {
-                DateInterval dateInterval = new DateInterval();
-                dateInterval.setDateFrom(dateFromStrings[i]); // String преобразуется к XMLGregorianCalendar автоматически
-                dateInterval.setDateTo(dateToStrings[i]);
-                clientRequest.getDateIntervals().add(dateInterval);
-            }
         }
 
         FileFormat fileFormat = null;

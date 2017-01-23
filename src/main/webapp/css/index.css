@@ -22,3 +22,15 @@ body {
     padding: 14px 24px;
     font-size: 21px;
 }
+
+label {
+    margin-top: 10px;
+}
+
+.btn-default {
+    margin-top: 10px;
+}
+
+.form-control {
+    margin-top: 10px;
+}

@@ -8,13 +8,13 @@ document.getElementById("addDateIntervalButton").onclick = function() {
     dateFromInput.type = "text";
     dateFromInput.className = "form-control";
     dateFromInput.name = "dateFrom";
-    dateFromInput.placeholder = "Date from"
+    dateFromInput.placeholder = "XMLGregorianCalendar"
 
     var dateToInput = document.createElement('input');
     dateToInput.type = "text";
     dateToInput.className = "form-control";
     dateToInput.name = "dateTo";
-    dateToInput.placeholder = "Date to"
+    dateToInput.placeholder = "XMLGregorianCalendar"
 
     dateFromDiv.appendChild(dateFromInput);
     dateToDiv.appendChild(dateToInput);

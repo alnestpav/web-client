@@ -56,14 +56,16 @@
         <label for="stringInput">String</label>
         <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
 
+        <label for="dateFromDiv">Date intervals</label>
         <div class="row">
-            <div class="col-md-6">
-                <p>Date intervals: </p>
+            <div class="col-md-6" id="dateFromDiv">
+                <label for="dateFrom">Date from</label>
+                <input type="text" class="form-control" id="dateFrom" name="dateFrom" placeholder="XMLGregorianCalendar">
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6" id="dateFromDiv"></div>
-            <div class="col-md-6" id="dateToDiv"></div>
+            <div class="col-md-6" id="dateToDiv">
+                <label for="dateTo">Date to</label>
+                <input type="text" class="form-control" id="dateTo" name="dateTo" placeholder="XMLGregorianCalendar">
+            </div>
         </div>
         <div class="row">
             <div class="col-md-6">
