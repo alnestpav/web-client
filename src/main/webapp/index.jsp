@@ -56,7 +56,6 @@
         <label for="stringInput">String</label>
         <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
 
-        <label for="dateFromDiv">Date intervals</label>
         <div class="row">
             <div class="col-md-6" id="dateFromDiv">
                 <label for="dateFrom">Date from</label>
