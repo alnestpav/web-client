@@ -90,7 +90,7 @@
     </form>
     <div>
         <c:choose>
-            <c:when test="${logMessages != null}">
+            <c:when test="${not empty logMessages}">
                 <c:forEach items="${logMessages}" var="logMessage">
                     <div class="log-message">
                         <p><c:out value="${logMessage.message}" escapeXml="true"></c:out></p>
