@@ -14,9 +14,8 @@
 <blockquote>
     <img src=BEA_Button_Final_web.gif align=right>
     <h2>Please enter your user name and password:</h2>
-    <p>
     ${pageContext.request.userPrincipal}
-    <form method="POST" action="j_security_check">
+    <form>
         <table border=1>
             <tr>
                 <td>Username:</td>
