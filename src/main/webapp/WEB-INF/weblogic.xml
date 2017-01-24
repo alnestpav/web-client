@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/90" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+
+    <security-role-assignment>
+        <role-name>ClusterSearchRole</role-name>
+        <principal-name>ClusterSearchGroup</principal-name>
+    </security-role-assignment>
+
+    <security-role-assignment>
+        <role-name>DomainSearchRole</role-name>
+        <principal-name>DomainSearchGroup</principal-name>
+    </security-role-assignment>
+
+    <security-role-assignment>
+        <role-name>ServerSearchRole</role-name>
+        <principal-name>ServerSearchGroup</principal-name>
+    </security-role-assignment>
+
+</weblogic-web-app>
