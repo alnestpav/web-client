@@ -28,8 +28,17 @@ document.getElementById("setColor").onclick = function() {
 
     rgbColor = hexToRgb(color);
     hslColor = rgbToHsl(rgbColor.r, rgbColor.g, rgbColor.b);
-    alert("one " + hslColor[0] + "two " + hslColor[1] + "three " + hslColor[2]);
-    if ((hslColor[0] < 0.010 || hslColor[0] > 0.310) && hslColor[1] > 0.7 && hslColor[2] > 0.4) {
+
+    var h = hslColor[0]*360;
+    var s = hslColor[1];
+    var v = hslColor[2];
+
+    alert("h " + h + " s " + s + " v " + v);
+
+    if (
+        ((h < 10 || h > 345) && s > 0.7 && v > 0.6) ||
+        ((h >= 300 && h <= 345) && s > 0.7 && v > 0.4)
+       ) {
         alert("Pink color is not supported!")
     } else {
         document.body.style.background = color;
