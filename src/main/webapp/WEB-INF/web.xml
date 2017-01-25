@@ -44,12 +44,12 @@
 
 
     <servlet>
-        <servlet-name>myServlet</servlet-name>
+        <servlet-name>searchServlet</servlet-name>
         <servlet-class>ru.siblion.nesterov.client.SearchServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>myServlet</servlet-name>
+        <servlet-name>searchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
 

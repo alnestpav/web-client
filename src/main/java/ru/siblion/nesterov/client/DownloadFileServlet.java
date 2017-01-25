@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.*;
+import java.net.URL;
 import java.net.URLEncoder;
 
 
@@ -18,7 +19,22 @@ public class DownloadFileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         String fileName = URLEncoder.encode(request.getParameter("fileName"), "UTF-8"); // сохраняет знак плюс "+"
-        System.out.println("fileName " + fileName);
-        response.sendRedirect(PATH + fileName);
+        /*System.out.println("fileName " + fileName);
+        response.sendRedirect(PATH + fileName);*/
+
+        URL url = new URL(PATH + fileName);
+        BufferedInputStream inStream = new BufferedInputStream(url.openStream());
+
+        // obtains response's output stream
+        OutputStream outStream = response.getOutputStream();
+
+        byte[] buffer = new byte[4096];
+        int bytesRead = -1;
+        while ((bytesRead = inStream.read(buffer)) != -1) {
+            outStream.write(buffer, 0, bytesRead);
+        }
+        inStream.close();
+        outStream.flush();
+        outStream.close();
     }
 }
