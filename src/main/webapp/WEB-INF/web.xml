@@ -16,6 +16,11 @@
             <http-method>POST</http-method>
             <http-method>GET</http-method>
         </web-resource-collection>
+        <auth-constraint>
+            <role-name>ClusterSearchRole</role-name>
+            <role-name>DomainSearchRole</role-name>
+            <role-name>ServerSearchRole</role-name>
+        </auth-constraint>
     </security-constraint>
 
     <login-config>
@@ -56,6 +61,16 @@
     <servlet-mapping>
         <servlet-name>downloadFileServlet</servlet-name>
         <url-pattern>/download</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>signoutServlet</servlet-name>
+        <servlet-class>ru.siblion.nesterov.client.SignoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>signoutServlet</servlet-name>
+        <url-pattern>/signout</url-pattern>
     </servlet-mapping>
 
 </web-app>

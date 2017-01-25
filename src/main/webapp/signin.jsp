@@ -17,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Sign in</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -42,12 +42,11 @@
 
         <c:if test="${pageContext.request.getParameter('error')}">
             <div class="alert alert-danger">
-                <strong>Ошибка</strong>
+                <strong>Incorrect username or password</strong>
             </div>
         </c:if>
 
     </div>
-
 
 </body>
 </html>

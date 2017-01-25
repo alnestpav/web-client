@@ -13,7 +13,7 @@ import java.net.URLEncoder;
  * Created by alexander on 23.01.2017.
  */
 public class DownloadFileServlet extends HttpServlet {
-    private static final String PATH = "http://192.168.0.164:7001/logreader-1.0.1/resources/restWebService/";
+    private static final String PATH = "http://localhost:7001/logreader-1.0.1/resources/restWebService/";
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {

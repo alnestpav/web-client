@@ -41,50 +41,61 @@
             </button>
             <a class="navbar-brand" href="#">LogSearcher</a>
         </div>
-        <form class="navbar-form navbar-right">
+        <form class="navbar-form navbar-right"><strong>${pageContext.request.userPrincipal}</strong>
             <a class="btn btn-default" href="signout" role="button">Sign out</a>
         </form>
     </div>
 </nav>
 
 <div class="container">
-    <form action="./search" method="post">
-        <label for="stringInput">String</label>
-        <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
+    <div class="row">
+        <div class="col-md-6">
+            <form action="./search" method="post">
+                <label for="stringInput">String</label>
+                <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
 
-        <div class="row">
-            <div class="col-md-6" id="dateFromDiv">
-                <label for="dateFrom">Date from</label>
-                <input type="text" class="form-control" id="dateFrom" name="dateFrom" placeholder="XMLGregorianCalendar">
-            </div>
-            <div class="col-md-6" id="dateToDiv">
-                <label for="dateTo">Date to</label>
-                <input type="text" class="form-control" id="dateTo" name="dateTo" placeholder="XMLGregorianCalendar">
-            </div>
+                <div class="row">
+                    <div class="col-md-4" id="dateFromDiv">
+                        <label for="dateFrom">Date from</label>
+                        <input type="text" class="form-control" id="dateFrom" name="dateFrom" placeholder="XMLGregorianCalendar">
+                    </div>
+                    <div class="col-md-4" id="dateToDiv">
+                        <label for="dateTo">Date to</label>
+                        <input type="text" class="form-control" id="dateTo" name="dateTo" placeholder="XMLGregorianCalendar">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-default" id="addDateIntervalButton">Add date interval</button>
+                    </div>
+                </div>
+
+                <label for="locationInput">Location for search</label>
+                <input type="text" class="form-control" id="locationInput" name="location" placeholder="Domain, cluster or server">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="FileFormatSelect">File format</label>
+
+                        <!-- Переписать, чтобы форматы брались из перечисления FileFormat -->
+                        <select class="form-control" id="FileFormatSelect" name="fileFormat">
+                            <option>no</option>
+                            <option>doc</option>
+                            <option>html</option>
+                            <option>log</option>
+                            <option>pdf</option>
+                            <option>rtf</option>
+                            <option>xml</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-default" id="startLogSearchButton">Search</button>
+            </form>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <button type="button" class="btn btn-default" id="addDateIntervalButton">Add date interval</button>
-            </div>
-        </div>
 
-        <label for="locationInput">Location for search</label>
-        <input type="text" class="form-control" id="locationInput" name="location" placeholder="Domain, cluster or server">
+    </div>
 
-        <label for="FileFormatSelect">File format</label>
-
-        <!-- Переписать, чтобы форматы брались из перечисления FileFormat -->
-        <select class="form-control" id="FileFormatSelect" name="fileFormat">
-            <option>no</option>
-            <option>doc</option>
-            <option>html</option>
-            <option>log</option>
-            <option>pdf</option>
-            <option>rtf</option>
-            <option>xml</option>
-        </select>
-        <button type="submit" class="btn btn-default" id="startLogSearchButton">Search</button>
-    </form>
     <div>
         <c:choose>
             <c:when test="${not empty logMessages}">
