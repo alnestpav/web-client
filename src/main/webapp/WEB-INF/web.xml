@@ -16,6 +16,7 @@
             <url-pattern>/css/*.css</url-pattern>
             <url-pattern>/js/*.js</url-pattern>
             <url-pattern>signin.jsp</url-pattern>
+            <url-pattern>/*</url-pattern>
             <http-method>POST</http-method>
             <http-method>GET</http-method>
         </web-resource-collection>

@@ -54,28 +54,15 @@
                 <form action="./search" method="post">
                     <label for="stringInput">String</label>
                     <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
-                    <div id="dateIntervalsDiv">
-                        <div class="row dateInterval">
-                            <div class="col-xs-4 col-sm-4 col-md-4 dateFromDiv">
-                                <label for="dateFrom">Date from</label>
-                                <input type="text" class="form-control" id="dateFrom" name="dateFrom" placeholder="XMLGregorianCalendar">
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 dateToDiv">
-                                <label for="dateTo">Date to</label>
-                                <input type="text" class="form-control" id="dateTo" name="dateTo" placeholder="XMLGregorianCalendar">
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4" id="removeDateIntervalButtonDiv">
-                                <button type="button" class="btn btn-default" id="removeDateIntervalButton">Remove</button>
-                            </div>
-                        </div>
-                    </div>
-
+                    <label>Date intervals</label>
                     <div class="row">
                         <div class="col-md-6">
                             <button type="button" class="btn btn-default" id="addDateIntervalButton">Add date interval</button>
                         </div>
                     </div>
-
+                    <div id="dateIntervalsDiv">
+                        <!-- Сюда будут добавляться интервалы дат при нажатии на кнопку Add date interval -->
+                    </div>
                     <label for="locationInput">Location for search</label>
                     <input type="text" class="form-control" id="locationInput" name="location" placeholder="Domain, cluster or server">
 

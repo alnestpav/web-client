@@ -7,10 +7,10 @@ document.getElementById("addDateIntervalButton").onclick = function() {
     dateIntervalDiv.className = "row dateInterval";
 
     var dateFromDiv = document.createElement('div');
-    dateFromDiv.className = "col-xs-4 col-sm-4 col-md-4 dateFromDiv";
+    dateFromDiv.className = "col-xs-5 col-sm-5 col-md-5 dateFromDiv";
 
     var dateToDiv = document.createElement('div');
-    dateToDiv.className = "col-xs-4 col-sm-4 col-md-4 dateToDiv";
+    dateToDiv.className = "col-xs-5 col-sm-5 col-md-5 dateToDiv";
 
     var dateFromInput = document.createElement('input');
     dateFromInput.type = "text";
@@ -24,6 +24,17 @@ document.getElementById("addDateIntervalButton").onclick = function() {
     dateToInput.name = "dateTo";
     dateToInput.placeholder = "XMLGregorianCalendar"
 
+    var dateFromLabel = document.createElement('label');
+    dateFromLabel.for = "dateFrom";
+    dateFromLabel.innerHTML = "Date From";
+
+    var dateToLabel = document.createElement('label');
+    dateToLabel.for = "dateTo";
+    dateToLabel.innerHTML = "Date To";
+
+
+    dateFromDiv.appendChild(dateFromLabel);
+    dateToDiv.appendChild(dateToLabel);
     dateFromDiv.appendChild(dateFromInput);
     dateToDiv.appendChild(dateToInput);
 
@@ -32,7 +43,7 @@ document.getElementById("addDateIntervalButton").onclick = function() {
 
 
     var removeDateIntervalButtonDiv = document.createElement('div');
-    removeDateIntervalButtonDiv.className = "col-xs-4 col-sm-4 col-md-4";
+    removeDateIntervalButtonDiv.className = "col-xs-2 col-sm-2 col-md-2";
     removeDateIntervalButtonDiv.id = "removeDateIntervalButtonDiv";
 
     var removeDateIntervalButton = document.createElement('button');
