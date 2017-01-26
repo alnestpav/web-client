@@ -25,7 +25,6 @@ document.getElementById("addDateIntervalButton").onclick = function() {
 document.getElementById("setColor").onclick = function() {
     color = document.getElementById("colorInput").value;
 
-
     rgbColor = hexToRgb(color);
     hslColor = rgbToHsl(rgbColor.r, rgbColor.g, rgbColor.b);
 
@@ -33,7 +32,7 @@ document.getElementById("setColor").onclick = function() {
     var s = hslColor[1];
     var v = hslColor[2];
 
-    alert("h " + h + " s " + s + " v " + v);
+    //alert("h " + h + " s " + s + " v " + v);
 
     if (
         ((h < 10 || h > 345) && s > 0.7 && v > 0.6) ||
@@ -42,6 +41,8 @@ document.getElementById("setColor").onclick = function() {
         alert("Pink color is not supported!")
     } else {
         document.body.style.background = color;
+        // Сохранение данных в localStorage
+        localStorage.setItem('color', color);
     }
 
 
@@ -75,4 +76,16 @@ function rgbToHsl(r, g, b){
     }
 
     return [h, s, l];
+}
+
+window.onload = function() {
+    // Получение данных из localStorage
+    var color = localStorage.getItem('color');
+    if (color != null) {
+        document.body.style.background = color;
+    }
+}
+
+document.getElementById("signoutButton").onclick = function() {
+    localStorage.setItem('color', null);
 }

@@ -43,7 +43,7 @@
                 <input type="color" id="colorInput" value="#ff0000">
                 <button class="btn btn-default" id="setColor">Set a color!</button>
                 <strong>${pageContext.request.userPrincipal}</strong>
-                <a class="btn btn-default" href="signout" role="button">Sign out</a>
+                <a class="btn btn-default" href="signout" role="button" id="signoutButton">Sign out</a>
             </div>
         </div>
     </nav>
@@ -90,8 +90,8 @@
                             </select>
                         </div>
                     </div>
-
                     <button type="submit" class="btn btn-default" id="startLogSearchButton">Search</button>
+                    <button class="btn btn-default" type="reset">Reset</button>
                 </form>
             </div>
 
