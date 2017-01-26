@@ -89,3 +89,9 @@ window.onload = function() {
 document.getElementById("signoutButton").onclick = function() {
     localStorage.setItem('color', null);
 }
+
+removeDateIntervalButton = document.getElementById("removeDateIntervalButton");
+removeDateIntervalButton = function() {
+    removeDateIntervalButton.parentElement.removeChild(dateFrom);
+    removeDateIntervalButton.parentElement.removeChild(dateTo);
+}

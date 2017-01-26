@@ -56,13 +56,20 @@
                     <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
 
                     <div class="row">
-                        <div class="col-md-4" id="dateFromDiv">
-                            <label for="dateFrom">Date from</label>
-                            <input type="text" class="form-control" id="dateFrom" name="dateFrom" placeholder="XMLGregorianCalendar">
+                        <div class="col-xs-6 col-sm-6 col-md-6" id="dateFromDiv">
+                            <div class="form-group">
+                                <label for="dateFrom">Date from</label>
+                                <input type="text" class="form-control" id="dateFrom" name="dateFrom" placeholder="XMLGregorianCalendar">
+                            </div>
                         </div>
-                        <div class="col-md-4" id="dateToDiv">
-                            <label for="dateTo">Date to</label>
-                            <input type="text" class="form-control" id="dateTo" name="dateTo" placeholder="XMLGregorianCalendar">
+                        <div class="col-xs-6 col-sm-6 col-md-6" id="dateToDiv">
+                            <div class="form-group">
+                                <label for="dateTo">Date to</label>
+                                <input type="text" class="form-control" id="dateTo" name="dateTo" placeholder="XMLGregorianCalendar">
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6" id="removeDateIntervalButtonDiv">
+                            <button type="button" class="btn btn-default" id="removeDateIntervalButton">Remove</button>
                         </div>
                     </div>
                     <div class="row">
