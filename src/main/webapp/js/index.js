@@ -3,6 +3,14 @@
  */
 
 document.getElementById("addDateIntervalButton").onclick = function() {
+    var dateIntervalDiv = document.createElement('div');
+    dateIntervalDiv.className = "row dateInterval";
+
+    var dateFromDiv = document.createElement('div');
+    dateFromDiv.className = "col-xs-4 col-sm-4 col-md-4 dateFromDiv";
+
+    var dateToDiv = document.createElement('div');
+    dateToDiv.className = "col-xs-4 col-sm-4 col-md-4 dateToDiv";
 
     var dateFromInput = document.createElement('input');
     dateFromInput.type = "text";
@@ -18,6 +26,29 @@ document.getElementById("addDateIntervalButton").onclick = function() {
 
     dateFromDiv.appendChild(dateFromInput);
     dateToDiv.appendChild(dateToInput);
+
+    dateIntervalDiv.appendChild(dateFromDiv);
+    dateIntervalDiv.appendChild(dateToDiv);
+
+
+    var removeDateIntervalButtonDiv = document.createElement('div');
+    removeDateIntervalButtonDiv.className = "col-xs-4 col-sm-4 col-md-4";
+    removeDateIntervalButtonDiv.id = "removeDateIntervalButtonDiv";
+
+    var removeDateIntervalButton = document.createElement('button');
+    removeDateIntervalButton.type = "button";
+    removeDateIntervalButton.className = "btn btn-default";
+    removeDateIntervalButton.id = "addDateIntervalButton";
+    removeDateIntervalButton.innerHTML = "Remove";
+    removeDateIntervalButton.onclick = removeDateInterval;
+
+    removeDateIntervalButtonDiv.appendChild(removeDateIntervalButton);
+
+
+    dateIntervalDiv.appendChild(removeDateIntervalButtonDiv);
+    document.getElementById("dateIntervalsDiv").appendChild(dateIntervalDiv);
+
+
 
 }
 
@@ -90,8 +121,6 @@ document.getElementById("signoutButton").onclick = function() {
     localStorage.setItem('color', null);
 }
 
-removeDateIntervalButton = document.getElementById("removeDateIntervalButton");
-removeDateIntervalButton = function() {
-    removeDateIntervalButton.parentElement.removeChild(dateFrom);
-    removeDateIntervalButton.parentElement.removeChild(dateTo);
+function removeDateInterval() {
+    this.parentElement.parentElement.remove();
 }

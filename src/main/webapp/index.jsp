@@ -54,24 +54,22 @@
                 <form action="./search" method="post">
                     <label for="stringInput">String</label>
                     <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
-
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6" id="dateFromDiv">
-                            <div class="form-group">
+                    <div id="dateIntervalsDiv">
+                        <div class="row dateInterval">
+                            <div class="col-xs-4 col-sm-4 col-md-4 dateFromDiv">
                                 <label for="dateFrom">Date from</label>
                                 <input type="text" class="form-control" id="dateFrom" name="dateFrom" placeholder="XMLGregorianCalendar">
                             </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6" id="dateToDiv">
-                            <div class="form-group">
+                            <div class="col-xs-4 col-sm-4 col-md-4 dateToDiv">
                                 <label for="dateTo">Date to</label>
                                 <input type="text" class="form-control" id="dateTo" name="dateTo" placeholder="XMLGregorianCalendar">
                             </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6" id="removeDateIntervalButtonDiv">
-                            <button type="button" class="btn btn-default" id="removeDateIntervalButton">Remove</button>
+                            <div class="col-xs-4 col-sm-4 col-md-4" id="removeDateIntervalButtonDiv">
+                                <button type="button" class="btn btn-default" id="removeDateIntervalButton">Remove</button>
+                            </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <button type="button" class="btn btn-default" id="addDateIntervalButton">Add date interval</button>

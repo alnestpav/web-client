@@ -30,3 +30,13 @@ body {
 input, select {
     margin-bottom: 10px;
 }
+
+.dateInterval {
+    position: relative;
+}
+
+#removeDateIntervalButtonDiv {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
