@@ -93,13 +93,18 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-default" id="startLogSearchButton">Search</button>
-                    <button class="btn btn-default" type="reset">Reset</button>
+                    <button class="btn btn-default" type="reset" id="resetButton">Reset</button>
                 </form>
             </div>
 
         </div>
 
         <div>
+            <c:if test="${message != null}">
+                <div class="alert alert-info">
+                    <strong>${message}</strong>
+                </div>
+            </c:if>
             <c:choose>
                 <c:when test="${not empty logMessages}">
                     <c:forEach items="${logMessages}" var="logMessage">

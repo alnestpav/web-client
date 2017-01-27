@@ -79,6 +79,9 @@ public class SearchServlet extends HttpServlet {
 
         List<LogMessage> logMessages = clientResponse.getLogMessages();
         String outputFile = (String) clientResponse.getOutputFile();
+        String message = (String) clientResponse.getMessage();
+        request.setAttribute("message", message);
+        System.out.println("message " + message);
         if (outputFile != null) { // разобраться почему одновременно outputFile и logMessages существуют!
             Pattern fileNamePattern = Pattern.compile("\\\\[^\\\\]*$");
             Matcher fileNameMatcher = fileNamePattern.matcher(outputFile);

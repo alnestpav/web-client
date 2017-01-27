@@ -153,6 +153,11 @@ locationTypeSelect.onchange = function() {
 
 }
 
+document.getElementById("resetButton").onclick = function() {
+    var locationInput = document.getElementById("locationInput");
+    locationInput.disabled = true;
+}
+
 
 document.getElementById("signoutButton").onclick = function() {
     localStorage.setItem('color', null);

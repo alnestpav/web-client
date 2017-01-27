@@ -11,6 +11,7 @@ body {
 }
 
 .jumbotron {
+    margin-top: 10px;
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
 }
@@ -35,4 +36,10 @@ input, select {
     bottom: 0;
     right: 0;
     position: absolute;
+}
+
+.alert {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
 }
