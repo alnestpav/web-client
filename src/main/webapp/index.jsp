@@ -63,8 +63,18 @@
                     <div id="dateIntervalsDiv">
                         <!-- Сюда будут добавляться интервалы дат при нажатии на кнопку Add date interval -->
                     </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="locationTypeSelect">Location type</label>
+                            <select class="form-control" id="locationTypeSelect" name="locationType">
+                                <option>domain</option>
+                                <option>cluster</option>
+                                <option>server</option>
+                            </select>
+                        </div>
+                    </div>
                     <label for="locationInput">Location for search</label>
-                    <input type="text" class="form-control" id="locationInput" name="location" placeholder="Domain, cluster or server">
+                    <input type="text" class="form-control" id="locationInput" name="location" placeholder="Location name">
 
                     <div class="row">
                         <div class="col-md-3">

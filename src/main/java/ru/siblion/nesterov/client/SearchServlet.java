@@ -32,6 +32,7 @@ public class SearchServlet extends HttpServlet {
         String string = request.getParameter("string");
         String location = request.getParameter("location");
         String fileFormatString = request.getParameter("fileFormat");
+        String locationTypeString = request.getParameter("locationType");
 
         String[] dateFromStrings = request.getParameterValues("dateFrom");
         String[] dateToStrings = request.getParameterValues("dateTo");
@@ -39,6 +40,7 @@ public class SearchServlet extends HttpServlet {
 
         System.out.println(string);
         System.out.println(location);
+        System.out.println(locationTypeString);
         System.out.println(Arrays.toString(dateFromStrings));
         System.out.println(Arrays.toString(dateToStrings));
         System.out.println(fileFormatString);
@@ -48,6 +50,8 @@ public class SearchServlet extends HttpServlet {
 
         Request clientRequest = new Request();
         clientRequest.setString(string);
+        LocationType locationType = LocationType.fromValue(locationTypeString);
+        clientRequest.setLocationType(locationType);
         clientRequest.setLocation(location);
 
         for (int i = 0; i < dateFromStrings.length; i++) {
