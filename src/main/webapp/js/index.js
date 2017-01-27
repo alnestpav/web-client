@@ -140,6 +140,17 @@ window.onload = function() {
         document.body.style.background = color;
     }
 }
+var locationTypeSelect = document.getElementById("locationTypeSelect");
+locationTypeSelect.onchange = function() {
+    var locationInput = document.getElementById("locationInput");
+    if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "domain") {
+        locationInput.disabled = true;
+    } else {
+        locationInput.disabled = false;
+    }
+
+}
+
 
 document.getElementById("signoutButton").onclick = function() {
     localStorage.setItem('color', null);

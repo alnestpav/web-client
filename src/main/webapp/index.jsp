@@ -73,8 +73,8 @@
                             </select>
                         </div>
                     </div>
-                    <label for="locationInput">Location for search</label>
-                    <input type="text" class="form-control" id="locationInput" name="location" placeholder="Location name">
+                    <label for="locationInput">Location name</label>
+                    <input type="text" class="form-control" id="locationInput" name="location" placeholder="Location name" disabled>
 
                     <div class="row">
                         <div class="col-md-3">
