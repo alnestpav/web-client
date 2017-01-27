@@ -3,6 +3,29 @@
  */
 
 document.getElementById("addDateIntervalButton").onclick = function() {
+    var dateIntervalsDiv = document.getElementById("dateIntervalsDiv");
+    var numberOfDateIntervals = dateIntervalsDiv.childElementCount;
+
+
+    if (numberOfDateIntervals == 0) {
+        var dateFromLabelDiv = document.createElement('div');
+        dateFromLabelDiv.className = "col-xs-5 col-sm-5 col-md-5";
+        var dateFromLabel = document.createElement('label');
+        dateFromLabel.innerHTML = "Date From";
+
+        var dateToLabelDiv = document.createElement('div');
+        dateToLabelDiv.className = "col-xs-5 col-sm-5 col-md-5";
+        var dateToLabel = document.createElement('label');
+        dateToLabel.innerHTML = "Date To";
+
+        dateFromLabelDiv.appendChild(dateFromLabel);
+        dateToLabelDiv.appendChild(dateToLabel);
+
+        dateIntervalsDiv.appendChild(dateFromLabelDiv);
+        dateIntervalsDiv.appendChild(dateToLabelDiv);
+    }
+
+
     var dateIntervalDiv = document.createElement('div');
     dateIntervalDiv.className = "row dateInterval";
 
@@ -24,19 +47,9 @@ document.getElementById("addDateIntervalButton").onclick = function() {
     dateToInput.name = "dateTo";
     dateToInput.placeholder = "XMLGregorianCalendar"
 
-    var dateFromLabel = document.createElement('label');
-    dateFromLabel.for = "dateFrom";
-    dateFromLabel.innerHTML = "Date From";
-
-    var dateToLabel = document.createElement('label');
-    dateToLabel.for = "dateTo";
-    dateToLabel.innerHTML = "Date To";
-
-
-    dateFromDiv.appendChild(dateFromLabel);
-    dateToDiv.appendChild(dateToLabel);
     dateFromDiv.appendChild(dateFromInput);
     dateToDiv.appendChild(dateToInput);
+
 
     dateIntervalDiv.appendChild(dateFromDiv);
     dateIntervalDiv.appendChild(dateToDiv);
@@ -133,5 +146,12 @@ document.getElementById("signoutButton").onclick = function() {
 }
 
 function removeDateInterval() {
-    this.parentElement.parentElement.remove();
+    var dateIntervalsDiv = document.getElementById("dateIntervalsDiv");
+    var numberOfDateIntervals = dateIntervalsDiv.childElementCount;
+
+    if (numberOfDateIntervals == 3) {
+        dateIntervalsDiv.innerHTML = "";
+    } else {
+        this.parentElement.parentElement.remove();
+    }
 }
