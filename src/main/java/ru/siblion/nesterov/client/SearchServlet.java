@@ -54,12 +54,20 @@ public class SearchServlet extends HttpServlet {
         clientRequest.setLocationType(locationType);
         clientRequest.setLocation(location);
 
-        for (int i = 0; i < dateFromStrings.length; i++) {
+        if (dateFromStrings != null) {
+            for (int i = 0; i < dateFromStrings.length; i++) {
+                DateInterval dateInterval = new DateInterval();
+                dateInterval.setDateFrom(dateFromStrings[i]); // String преобразуется к XMLGregorianCalendar автоматически
+                dateInterval.setDateTo(dateToStrings[i]);
+                clientRequest.getDateIntervals().add(dateInterval);
+            }
+        } else {
             DateInterval dateInterval = new DateInterval();
-            dateInterval.setDateFrom(dateFromStrings[i]); // String преобразуется к XMLGregorianCalendar автоматически
-            dateInterval.setDateTo(dateToStrings[i]);
+            dateInterval.setDateFrom(null); // String преобразуется к XMLGregorianCalendar автоматически
+            dateInterval.setDateTo(null);
             clientRequest.getDateIntervals().add(dateInterval);
         }
+
 
         FileFormat fileFormat = null;
         if (!fileFormatString.equals("no")) { // потом переписать

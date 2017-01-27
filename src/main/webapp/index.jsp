@@ -53,7 +53,7 @@
             <div class="col-md-6">
                 <form action="./search" method="post">
                     <label for="stringInput">String</label>
-                    <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression">
+                    <input type="text" class="form-control" id="stringInput" name="string" placeholder="String or regular expression" required>
                     <label>Date intervals</label>
                     <div class="row">
                         <div class="col-md-6">

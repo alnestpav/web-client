@@ -40,12 +40,14 @@ document.getElementById("addDateIntervalButton").onclick = function() {
     dateFromInput.className = "form-control";
     dateFromInput.name = "dateFrom";
     dateFromInput.placeholder = "XMLGregorianCalendar"
+    dateFromInput.required = true;
 
     var dateToInput = document.createElement('input');
     dateToInput.type = "text";
     dateToInput.className = "form-control";
     dateToInput.name = "dateTo";
     dateToInput.placeholder = "XMLGregorianCalendar"
+    dateToInput.required = true;
 
     dateFromDiv.appendChild(dateFromInput);
     dateToDiv.appendChild(dateToInput);
