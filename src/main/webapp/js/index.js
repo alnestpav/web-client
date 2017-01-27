@@ -90,8 +90,8 @@ document.getElementById("setColor").onclick = function() {
     //alert("h " + h + " s " + s + " v " + v);
 
     if (
-        ((h < 10 || h > 345) && s > 0.7 && v > 0.6) ||
-        ((h >= 300 && h <= 345) && s > 0.7 && v > 0.4)
+        ((h < 10 || h > 345) && s > 0.7 && v > 0.6 && v < 0.97) ||
+        ((h >= 300 && h <= 345) && s > 0.7 && v > 0.4 && v < 0.97)
        ) {
         alert("Pink color is not supported!")
     } else {
