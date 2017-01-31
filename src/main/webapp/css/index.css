@@ -8,6 +8,7 @@ body {
     padding: 10px;
     margin-bottom: 30px;
     word-wrap: break-word;
+    white-space: pre-wrap;
 }
 
 .jumbotron {
@@ -40,6 +41,6 @@ input, select {
 
 .alert {
     width: 300px;
-    margin: 0 auto;
+    margin: 10px auto;
     text-align: center;
 }
