@@ -36,14 +36,14 @@ document.getElementById("addDateIntervalButton").onclick = function() {
     dateToDiv.className = "col-xs-5 col-sm-5 col-md-5 dateToDiv";
 
     var dateFromInput = document.createElement('input');
-    dateFromInput.type = "text";
+    dateFromInput.type = "datetime-local";
     dateFromInput.className = "form-control";
     dateFromInput.name = "dateFrom";
     dateFromInput.placeholder = "XMLGregorianCalendar"
     dateFromInput.required = true;
 
     var dateToInput = document.createElement('input');
-    dateToInput.type = "text";
+    dateToInput.type = "datetime-local";
     dateToInput.className = "form-control";
     dateToInput.name = "dateTo";
     dateToInput.placeholder = "XMLGregorianCalendar"

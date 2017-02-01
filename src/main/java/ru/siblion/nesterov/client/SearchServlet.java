@@ -1,5 +1,6 @@
 package ru.siblion.nesterov.client;
 
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import ru.siblion.nesterov.logreader.ws.*;
 
 import javax.servlet.RequestDispatcher;
@@ -7,8 +8,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,19 +62,29 @@ public class SearchServlet extends HttpServlet {
         LocationType locationType = LocationType.fromValue(locationTypeString);
         clientRequest.setLocationType(locationType);
         clientRequest.setLocation(location);
+        try {
+            DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();
 
-        if (dateFromStrings != null) {
-            for (int i = 0; i < dateFromStrings.length; i++) {
+            if (dateFromStrings != null) {
+                XMLGregorianCalendar dateFrom;
+                XMLGregorianCalendar dateTo;
+                for (int i = 0; i < dateFromStrings.length; i++) {
+                    DateInterval dateInterval = new DateInterval();
+                    dateFrom = stringToXMLGregorianCalendar(datatypeFactory, dateFromStrings[i]);
+                    dateTo = stringToXMLGregorianCalendar(datatypeFactory, dateToStrings[i]);
+
+                    dateInterval.setDateFrom(dateFrom);
+                    dateInterval.setDateTo(dateTo);
+                    clientRequest.getDateIntervals().add(dateInterval);
+                }
+            } else {
                 DateInterval dateInterval = new DateInterval();
-                dateInterval.setDateFrom(dateFromStrings[i]); // String преобразуется к XMLGregorianCalendar автоматически
-                dateInterval.setDateTo(dateToStrings[i]);
+                dateInterval.setDateFrom(null);
+                dateInterval.setDateTo(null);
                 clientRequest.getDateIntervals().add(dateInterval);
             }
-        } else {
-            DateInterval dateInterval = new DateInterval();
-            dateInterval.setDateFrom(null); // String преобразуется к XMLGregorianCalendar автоматически
-            dateInterval.setDateTo(null);
-            clientRequest.getDateIntervals().add(dateInterval);
+        } catch (DatatypeConfigurationException e) {
+            e.printStackTrace();
         }
 
 
@@ -100,6 +119,21 @@ public class SearchServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
 
+    }
+
+    private XMLGregorianCalendar stringToXMLGregorianCalendar(DatatypeFactory datatypeFactoryInstance, String stringDate) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        Date date = null;
+        try {
+            date = dateFormat.parse(stringDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        gregorianCalendar.setTime(date);
+        XMLGregorianCalendar xmlGregorianDate;
+        xmlGregorianDate = datatypeFactoryInstance.newXMLGregorianCalendar(gregorianCalendar);
+        return xmlGregorianDate;
     }
 
 
