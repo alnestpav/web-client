@@ -1,5 +1,6 @@
 package ru.siblion.nesterov.client.servlets;
 
+import ru.siblion.nesterov.client.managing.RoleManager;
 import ru.siblion.nesterov.client.type.Role;
 import ru.siblion.nesterov.logreader.ws.*;
 
@@ -61,39 +62,13 @@ public class SearchServlet extends HttpServlet {
         /* Если роль пользователя не поддерживает выбранный тип локации поиска,
         *  то перенаправить его на страницу с сообщением об ошибке */
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
-        Map<Role, Set<LocationType>> roles = new HashMap<>();
-
-
-        Set<LocationType> serverSearchRoleLocationTypes = new HashSet<>();
-        serverSearchRoleLocationTypes.add(LocationType.SERVER);
-
-        Set<LocationType> clusterSearchRoleLocationTypes = new HashSet<>();
-        clusterSearchRoleLocationTypes.add(LocationType.SERVER);
-        clusterSearchRoleLocationTypes.add(LocationType.CLUSTER);
-
-        Set<LocationType> domainSearchRoleLocationTypes = new HashSet<>();
-        domainSearchRoleLocationTypes.add(LocationType.SERVER);
-        domainSearchRoleLocationTypes.add(LocationType.CLUSTER);
-        domainSearchRoleLocationTypes.add(LocationType.DOMAIN);
-
-
-        roles.put(Role.ServerSearchRole, serverSearchRoleLocationTypes);
-        roles.put(Role.ClusterSearchRole, clusterSearchRoleLocationTypes);
-        roles.put(Role.DomainSearchRole, domainSearchRoleLocationTypes);
+        Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
 
         for (Map.Entry<Role, Set<LocationType>> role :roles.entrySet()) {
             if (request.isUserInRole(role.getKey().toString()) && !role.getValue().contains(locationType)) {
                 requestDispatcher.forward(request, response);
             }
         }
-
-        /*if ( (request.isUserInRole("ClusterSearchRole") &&
-                    (locationType != LocationType.SERVER && locationType != LocationType.CLUSTER)) ||
-                ((request.isUserInRole("ServerSearchRole") &&
-                        locationType != LocationType.SERVER)) ) {
-            requestDispatcher.forward(request, response);
-            return;
-        }*/
 
         clientRequest.setLocationType(locationType);
         clientRequest.setLocation(location);
@@ -133,9 +108,8 @@ public class SearchServlet extends HttpServlet {
 
         List<LogMessage> logMessages = clientResponse.getLogMessages();
         String outputFile = (String) clientResponse.getOutputFile();
-        String message = (String) clientResponse.getMessage();
+        String message = clientResponse.getMessage();
         request.setAttribute("message", message);
-        System.out.println("message " + message);
         if (outputFile != null) { // разобраться почему одновременно outputFile и logMessages существуют!
             Pattern fileNamePattern = Pattern.compile("\\\\[^\\\\]*$");
             Matcher fileNameMatcher = fileNamePattern.matcher(outputFile);
