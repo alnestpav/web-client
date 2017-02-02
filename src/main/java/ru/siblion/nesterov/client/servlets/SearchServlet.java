@@ -1,6 +1,6 @@
-package ru.siblion.nesterov.client;
+package ru.siblion.nesterov.client.servlets;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import ru.siblion.nesterov.client.type.Role;
 import ru.siblion.nesterov.logreader.ws.*;
 
 import javax.servlet.RequestDispatcher;
@@ -15,10 +15,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,6 +57,44 @@ public class SearchServlet extends HttpServlet {
         Request clientRequest = new Request();
         clientRequest.setString(string);
         LocationType locationType = LocationType.fromValue(locationTypeString);
+
+        /* Если роль пользователя не поддерживает выбранный тип локации поиска,
+        *  то перенаправить его на страницу с сообщением об ошибке */
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
+        Map<Role, Set<LocationType>> roles = new HashMap<>();
+
+
+        Set<LocationType> serverSearchRoleLocationTypes = new HashSet<>();
+        serverSearchRoleLocationTypes.add(LocationType.SERVER);
+
+        Set<LocationType> clusterSearchRoleLocationTypes = new HashSet<>();
+        clusterSearchRoleLocationTypes.add(LocationType.SERVER);
+        clusterSearchRoleLocationTypes.add(LocationType.CLUSTER);
+
+        Set<LocationType> domainSearchRoleLocationTypes = new HashSet<>();
+        domainSearchRoleLocationTypes.add(LocationType.SERVER);
+        domainSearchRoleLocationTypes.add(LocationType.CLUSTER);
+        domainSearchRoleLocationTypes.add(LocationType.DOMAIN);
+
+
+        roles.put(Role.ServerSearchRole, serverSearchRoleLocationTypes);
+        roles.put(Role.ClusterSearchRole, clusterSearchRoleLocationTypes);
+        roles.put(Role.DomainSearchRole, domainSearchRoleLocationTypes);
+
+        for (Map.Entry<Role, Set<LocationType>> role :roles.entrySet()) {
+            if (request.isUserInRole(role.getKey().toString()) && !role.getValue().contains(locationType)) {
+                requestDispatcher.forward(request, response);
+            }
+        }
+
+        /*if ( (request.isUserInRole("ClusterSearchRole") &&
+                    (locationType != LocationType.SERVER && locationType != LocationType.CLUSTER)) ||
+                ((request.isUserInRole("ServerSearchRole") &&
+                        locationType != LocationType.SERVER)) ) {
+            requestDispatcher.forward(request, response);
+            return;
+        }*/
+
         clientRequest.setLocationType(locationType);
         clientRequest.setLocation(location);
         try {
@@ -116,7 +151,7 @@ public class SearchServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
 
     }

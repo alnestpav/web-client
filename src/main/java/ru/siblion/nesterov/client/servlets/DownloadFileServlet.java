@@ -1,4 +1,4 @@
-package ru.siblion.nesterov.client;
+package ru.siblion.nesterov.client.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

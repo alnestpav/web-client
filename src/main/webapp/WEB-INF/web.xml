@@ -58,7 +58,7 @@
 
     <servlet>
         <servlet-name>searchServlet</servlet-name>
-        <servlet-class>ru.siblion.nesterov.client.SearchServlet</servlet-class>
+        <servlet-class>ru.siblion.nesterov.client.servlets.SearchServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -68,7 +68,7 @@
 
     <servlet>
         <servlet-name>downloadFileServlet</servlet-name>
-        <servlet-class>ru.siblion.nesterov.client.DownloadFileServlet</servlet-class>
+        <servlet-class>ru.siblion.nesterov.client.servlets.DownloadFileServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -78,7 +78,7 @@
 
     <servlet>
         <servlet-name>signinServlet</servlet-name>
-        <servlet-class>ru.siblion.nesterov.client.SigninServlet</servlet-class>
+        <servlet-class>ru.siblion.nesterov.client.servlets.SigninServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -88,7 +88,7 @@
 
     <servlet>
         <servlet-name>signoutServlet</servlet-name>
-        <servlet-class>ru.siblion.nesterov.client.SignoutServlet</servlet-class>
+        <servlet-class>ru.siblion.nesterov.client.servlets.SignoutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
