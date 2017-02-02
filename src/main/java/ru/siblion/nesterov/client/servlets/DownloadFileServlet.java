@@ -19,13 +19,10 @@ public class DownloadFileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         String fileName = URLEncoder.encode(request.getParameter("fileName"), "UTF-8"); // сохраняет знак плюс "+"
-        /*System.out.println("fileName " + fileName);
-        response.sendRedirect(PATH + fileName);*/
 
         URL url = new URL(PATH + fileName);
         BufferedInputStream inStream = new BufferedInputStream(url.openStream());
 
-        // obtains response's output stream
         OutputStream outStream = response.getOutputStream();
 
         byte[] buffer = new byte[4096];
