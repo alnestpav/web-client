@@ -135,14 +135,26 @@ function rgbToHsl(r, g, b){
     return [h, s, l];
 }
 
+
+var locationTypeSelect = document.getElementById("locationTypeSelect");
+
+
 window.onload = function() {
     // Получение данных из localStorage
     var color = localStorage.getItem('color');
     if (color != null) {
         document.body.style.background = color;
     }
+
+    var locationInput = document.getElementById("locationInput");
+    if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "domain") {
+        locationInput.disabled = true;
+    } else {
+        locationInput.disabled = false;
+    }
 }
-var locationTypeSelect = document.getElementById("locationTypeSelect");
+
+
 locationTypeSelect.onchange = function() {
     var locationInput = document.getElementById("locationInput");
     if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "domain") {
@@ -150,8 +162,8 @@ locationTypeSelect.onchange = function() {
     } else {
         locationInput.disabled = false;
     }
-
 }
+
 
 document.getElementById("resetButton").onclick = function() {
     var locationInput = document.getElementById("locationInput");
