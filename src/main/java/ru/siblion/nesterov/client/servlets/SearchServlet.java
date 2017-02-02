@@ -13,12 +13,11 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static ru.siblion.nesterov.client.utils.Utils.stringToXMLGregorianCalendar;
 
 /**
  * Created by alexander on 17.01.2017.
@@ -28,6 +27,18 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
+        Role userRole = Role.Default;
+        for (Role role : Role.values()) {
+            if (request.isUserInRole(role.toString())){
+                userRole = role;
+                break;
+            }
+        }
+
+        Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
+        Set<LocationType> locationTypeSet = roles.get(userRole);
+        System.out.println("locationTypeSet " + locationTypeSet);
+        request.setAttribute("locationTypeSet", locationTypeSet);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -52,26 +63,26 @@ public class SearchServlet extends HttpServlet {
         System.out.println(Arrays.toString(dateToStrings));
         System.out.println(fileFormatString);
 
-
-        SoapWebService service = new SoapWebServiceService().getSoapWebServicePort();
-
-        Request clientRequest = new Request();
-        clientRequest.setString(string);
         LocationType locationType = LocationType.fromValue(locationTypeString);
+
 
         /* Если роль пользователя не поддерживает выбранный тип локации поиска,
         *  то перенаправить его на страницу с сообщением об ошибке */
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
+        Role userRole = null;
         Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
-
         for (Map.Entry<Role, Set<LocationType>> role :roles.entrySet()) {
             if (request.isUserInRole(role.getKey().toString()) && !role.getValue().contains(locationType)) {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
                 requestDispatcher.forward(request, response);
             }
         }
 
+        Request clientRequest = new Request();
+        clientRequest.setString(string);
         clientRequest.setLocationType(locationType);
         clientRequest.setLocation(location);
+
+        // Парсинг дат
         try {
             DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();
 
@@ -104,6 +115,8 @@ public class SearchServlet extends HttpServlet {
         }
         clientRequest.setFileFormat(fileFormat);
 
+
+        SoapWebService service = new SoapWebServiceService().getSoapWebServicePort();
         Response clientResponse = service.getListOfLogMessages(clientRequest);
 
         List<LogMessage> logMessages = clientResponse.getLogMessages();
@@ -117,7 +130,7 @@ public class SearchServlet extends HttpServlet {
             String fileName = fileNameMatcher.group().substring(1); // получить имя файла, убрать первый символ '\'
             request.setAttribute("fileLink", "download?fileName=" + fileName);
         } else if (logMessages != null) {
-            request.setAttribute("logMessages", logMessages); //
+            request.setAttribute("logMessages", logMessages);
         } else {
             try {
                 throw new Exception();
@@ -125,25 +138,9 @@ public class SearchServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        requestDispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
 
     }
-
-    private XMLGregorianCalendar stringToXMLGregorianCalendar(DatatypeFactory datatypeFactoryInstance, String stringDate) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        Date date = null;
-        try {
-            date = dateFormat.parse(stringDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-        gregorianCalendar.setTime(date);
-        XMLGregorianCalendar xmlGregorianDate;
-        xmlGregorianDate = datatypeFactoryInstance.newXMLGregorianCalendar(gregorianCalendar);
-        return xmlGregorianDate;
-    }
-
 
 }

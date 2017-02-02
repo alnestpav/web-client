@@ -15,15 +15,14 @@ public class SigninServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
+
+        RequestDispatcher requestDispatcher;
         if (request.getUserPrincipal() != null) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/search");
-            requestDispatcher.forward(request, response);
+            requestDispatcher = request.getRequestDispatcher("/search");
         } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("signin.jsp");
-            requestDispatcher.forward(request, response);
+            requestDispatcher = request.getRequestDispatcher("signin.jsp");
         }
-
-
+        requestDispatcher.forward(request, response);
     }
 
 

@@ -66,9 +66,9 @@
                         <div class="col-md-3">
                             <label for="locationTypeSelect">Location type</label>
                             <select class="form-control" id="locationTypeSelect" name="locationType">
-                                <option>domain</option>
-                                <option>cluster</option>
-                                <option>server</option>
+                                <c:forEach items="${locationTypeSet}" var="locationType">
+                                    <option>${locationType.toString()}</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
