@@ -1,5 +1,6 @@
 package ru.siblion.nesterov.client.servlets;
 
+import ru.siblion.nesterov.client.managing.RecordsManager;
 import ru.siblion.nesterov.client.managing.RoleManager;
 import ru.siblion.nesterov.client.type.Role;
 import ru.siblion.nesterov.logreader.ws.*;
@@ -62,6 +63,10 @@ public class SearchServlet extends HttpServlet {
         System.out.println(Arrays.toString(dateFromStrings));
         System.out.println(Arrays.toString(dateToStrings));
         System.out.println(fileFormatString);
+
+
+        RecordsManager recordsManager = new RecordsManager();
+        recordsManager.addRecord(request.getRemoteUser(), "new request", "some message", new Date());
 
         LocationType locationType = LocationType.fromValue(locationTypeString);
 

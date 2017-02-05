@@ -30,6 +30,7 @@
             <http-method>GET</http-method>
         </web-resource-collection>
         <auth-constraint>
+            <role-name>Admin</role-name>
             <role-name>ClusterSearchRole</role-name>
             <role-name>DomainSearchRole</role-name>
             <role-name>ServerSearchRole</role-name>
@@ -45,6 +46,9 @@
         </form-login-config>
     </login-config>
 
+    <security-role>
+        <role-name>Admin</role-name>
+    </security-role>
     <security-role>
         <role-name>ClusterSearchRole</role-name>
     </security-role>

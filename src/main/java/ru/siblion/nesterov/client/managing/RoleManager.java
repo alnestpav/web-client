@@ -31,9 +31,15 @@ public class RoleManager {
         domainSearchRoleLocationTypes.add(LocationType.cluster);
         domainSearchRoleLocationTypes.add(LocationType.domain);
 
+        Set<LocationType> AdminLocationTypes = new LinkedHashSet<>();
+        AdminLocationTypes.add(LocationType.server);
+        AdminLocationTypes.add(LocationType.cluster);
+        AdminLocationTypes.add(LocationType.domain);
+
         roles.put(Role.ServerSearchRole, serverSearchRoleLocationTypes);
         roles.put(Role.ClusterSearchRole, clusterSearchRoleLocationTypes);
         roles.put(Role.DomainSearchRole, domainSearchRoleLocationTypes);
+        roles.put(Role.Admin, AdminLocationTypes);
 
     }
 
