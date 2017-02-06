@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import java.util.Date;
 
@@ -14,20 +15,10 @@ import java.util.Date;
  */
 @Stateless
 public class RecordsManager {
-    @PersistenceUnit
-    // Переменная для внедрения экземпляра EntityManagerFactory
-    private EntityManagerFactory entityManagerFactory;
+    @PersistenceContext(unitName = "client")
     private EntityManager entityManager;
 
-    @PostConstruct
-    private void init() {
-    // Создает EntityManager
-        entityManager = entityManagerFactory.createEntityManager();
-    }
-
     public void addRecord(String username, String action, String message, Date date) {
-        init();
-        entityManager.joinTransaction();
         Record record = new Record();
         record.setUsername(username);
         record.setAction(action);
