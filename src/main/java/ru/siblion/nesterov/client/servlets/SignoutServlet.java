@@ -1,6 +1,6 @@
 package ru.siblion.nesterov.client.servlets;
 
-import ru.siblion.nesterov.client.managing.RecordsManager;
+import ru.siblion.nesterov.client.managing.ClientLogger;
 import ru.siblion.nesterov.client.type.Action;
 
 import javax.ejb.EJB;
@@ -18,13 +18,13 @@ import java.util.Date;
  */
 public class SignoutServlet extends HttpServlet {
     @EJB
-    private RecordsManager recordsManager;
+    private ClientLogger clientLogger;
 
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         if (request.getRemoteUser() != null) {
-            recordsManager.addRecord(request.getRemoteUser(), Action.SIGN_OUT, "Sign out", new Date());
+            clientLogger.log(request.getRemoteUser(), Action.SIGN_OUT, "Sign out");
             HttpSession session = request.getSession(false);
             session.invalidate();
         }

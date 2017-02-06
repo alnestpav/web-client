@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="RECORDS")
-public class Record {
+public class ClientLogMessage {
 
 
     @Id
@@ -31,7 +31,7 @@ public class Record {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    public Record() {
+    public ClientLogMessage() {
 
     }
 

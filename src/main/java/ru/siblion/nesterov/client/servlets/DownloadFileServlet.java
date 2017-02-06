@@ -1,6 +1,6 @@
 package ru.siblion.nesterov.client.servlets;
 
-import ru.siblion.nesterov.client.managing.RecordsManager;
+import ru.siblion.nesterov.client.managing.ClientLogger;
 import ru.siblion.nesterov.client.type.Action;
 
 import javax.ejb.EJB;
@@ -20,7 +20,7 @@ import java.util.Date;
  */
 public class DownloadFileServlet extends HttpServlet {
     @EJB
-    private RecordsManager recordsManager;
+    private ClientLogger clientLogger;
 
     private static final String PATH = "http://localhost:7001/logreader-1.0.1/resources/restWebService/";
     @Override
@@ -29,7 +29,7 @@ public class DownloadFileServlet extends HttpServlet {
         String fileName = URLEncoder.encode(request.getParameter("fileName"), "UTF-8"); // сохраняет знак плюс "+"
 
         URL url = new URL(PATH + fileName);
-        recordsManager.addRecord(request.getRemoteUser(), Action.DOWNLOAD, "filename: " + fileName, new Date());
+        clientLogger.log(request.getRemoteUser(), Action.DOWNLOAD, "filename: " + fileName);
         BufferedInputStream inStream = new BufferedInputStream(url.openStream());
 
         OutputStream outStream = response.getOutputStream();
