@@ -1,6 +1,6 @@
 package ru.siblion.nesterov.client.servlets;
 
-import ru.siblion.nesterov.client.managing.ClientLogger;
+import ru.siblion.nesterov.client.utils.ClientLogger;
 import ru.siblion.nesterov.client.managing.RoleManager;
 import ru.siblion.nesterov.client.type.Action;
 import ru.siblion.nesterov.client.type.Role;
@@ -32,6 +32,17 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
+
+        /* Определяет набор типов локации, которые будут видны в select */
+        Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
+        Set<LocationType> locationTypeSet = roles.get(getUserRole(request));
+        request.setAttribute("locationTypeSet", locationTypeSet);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private Role getUserRole(HttpServletRequest request) {
         Role userRole = Role.Default;
         for (Role role : Role.values()) {
             if (request.isUserInRole(role.toString())){
@@ -39,13 +50,7 @@ public class SearchServlet extends HttpServlet {
                 break;
             }
         }
-
-        Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
-        Set<LocationType> locationTypeSet = roles.get(userRole);
-        System.out.println("locationTypeSet " + locationTypeSet);
-        request.setAttribute("locationTypeSet", locationTypeSet);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
-        requestDispatcher.forward(request, response);
+        return userRole;
     }
 
     @Override
@@ -75,14 +80,17 @@ public class SearchServlet extends HttpServlet {
 
         /* Если роль пользователя не поддерживает выбранный тип локации поиска,
         *  то перенаправить его на страницу с сообщением об ошибке */
-        Role userRole = null;
+        Role userRole = getUserRole(request);
         Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
-        for (Map.Entry<Role, Set<LocationType>> role :roles.entrySet()) {
-            if (request.isUserInRole(role.getKey().toString()) && !role.getValue().contains(locationType)) {
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
-                requestDispatcher.forward(request, response);
-            }
+        if (!roles.get(userRole).contains(locationType)) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
+            requestDispatcher.forward(request, response);
         }
+
+        /* Определяет набор типов локации, которые будут видны в select */
+        Set<LocationType> locationTypeSet = roles.get(getUserRole(request));
+        request.setAttribute("locationTypeSet", locationTypeSet);
+
 
         Request clientRequest = new Request();
         clientRequest.setString(string);
@@ -145,6 +153,7 @@ public class SearchServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
 

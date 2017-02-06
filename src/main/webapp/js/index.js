@@ -147,7 +147,7 @@ window.onload = function() {
     }
 
     var locationInput = document.getElementById("locationInput");
-    if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "domain") {
+    if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "DOMAIN") {
         locationInput.disabled = true;
     } else {
         locationInput.disabled = false;
@@ -157,7 +157,7 @@ window.onload = function() {
 
 locationTypeSelect.onchange = function() {
     var locationInput = document.getElementById("locationInput");
-    if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "domain") {
+    if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "DOMAIN") {
         locationInput.disabled = true;
     } else {
         locationInput.disabled = false;

@@ -1,6 +1,6 @@
 package ru.siblion.nesterov.client.servlets;
 
-import ru.siblion.nesterov.client.managing.ClientLogger;
+import ru.siblion.nesterov.client.utils.ClientLogger;
 import ru.siblion.nesterov.client.type.Action;
 
 import javax.ejb.EJB;
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * Created by alexander on 25.01.2017.

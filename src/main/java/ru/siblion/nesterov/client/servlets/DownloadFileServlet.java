@@ -1,6 +1,6 @@
 package ru.siblion.nesterov.client.servlets;
 
-import ru.siblion.nesterov.client.managing.ClientLogger;
+import ru.siblion.nesterov.client.utils.ClientLogger;
 import ru.siblion.nesterov.client.type.Action;
 
 import javax.ejb.EJB;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Date;
 
 
 /**

@@ -18,23 +18,22 @@ public class RoleManager {
         /* ws-import импортит класс LocationType, при этом константы записываются большими буквами.
         *  Надо либо руками исправлять на маленькие буквы, либо в основном проекте записать их большими */
 
-
         Set<LocationType> serverSearchRoleLocationTypes = new LinkedHashSet<>();
-        serverSearchRoleLocationTypes.add(LocationType.server);
+        serverSearchRoleLocationTypes.add(LocationType.SERVER);
 
         Set<LocationType> clusterSearchRoleLocationTypes = new LinkedHashSet<>();
-        clusterSearchRoleLocationTypes.add(LocationType.server);
-        clusterSearchRoleLocationTypes.add(LocationType.cluster);
+        clusterSearchRoleLocationTypes.add(LocationType.SERVER);
+        clusterSearchRoleLocationTypes.add(LocationType.CLUSTER);
 
         Set<LocationType> domainSearchRoleLocationTypes = new LinkedHashSet<>();
-        domainSearchRoleLocationTypes.add(LocationType.server);
-        domainSearchRoleLocationTypes.add(LocationType.cluster);
-        domainSearchRoleLocationTypes.add(LocationType.domain);
+        domainSearchRoleLocationTypes.add(LocationType.SERVER);
+        domainSearchRoleLocationTypes.add(LocationType.CLUSTER);
+        domainSearchRoleLocationTypes.add(LocationType.DOMAIN);
 
         Set<LocationType> AdminLocationTypes = new LinkedHashSet<>();
-        AdminLocationTypes.add(LocationType.server);
-        AdminLocationTypes.add(LocationType.cluster);
-        AdminLocationTypes.add(LocationType.domain);
+        AdminLocationTypes.add(LocationType.SERVER);
+        AdminLocationTypes.add(LocationType.CLUSTER);
+        AdminLocationTypes.add(LocationType.DOMAIN);
 
         roles.put(Role.ServerSearchRole, serverSearchRoleLocationTypes);
         roles.put(Role.ClusterSearchRole, clusterSearchRoleLocationTypes);

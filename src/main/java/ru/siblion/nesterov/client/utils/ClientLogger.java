@@ -1,4 +1,4 @@
-package ru.siblion.nesterov.client.managing;
+package ru.siblion.nesterov.client.utils;
 
 import ru.siblion.nesterov.client.type.Action;
 import ru.siblion.nesterov.client.type.ClientLogMessage;
@@ -25,13 +25,5 @@ public class ClientLogger {
         clientLogMessage.setMessage(message);
         clientLogMessage.setDate(new Date());
         entityManager.persist(clientLogMessage);
-    }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
     }
 }
