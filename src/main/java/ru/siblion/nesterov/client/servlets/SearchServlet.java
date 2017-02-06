@@ -5,6 +5,7 @@ import ru.siblion.nesterov.client.managing.RoleManager;
 import ru.siblion.nesterov.client.type.Role;
 import ru.siblion.nesterov.logreader.ws.*;
 
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,8 @@ import static ru.siblion.nesterov.client.utils.Utils.stringToXMLGregorianCalenda
  * Created by alexander on 17.01.2017.
  */
 public class SearchServlet extends HttpServlet {
+    @EJB
+    RecordsManager recordsManager;
 
     @Override
     protected void doGet(HttpServletRequest request,
@@ -64,8 +67,6 @@ public class SearchServlet extends HttpServlet {
         System.out.println(Arrays.toString(dateToStrings));
         System.out.println(fileFormatString);
 
-
-        RecordsManager recordsManager = new RecordsManager();
         recordsManager.addRecord(request.getRemoteUser(), "new request", "some message", new Date());
 
         LocationType locationType = LocationType.fromValue(locationTypeString);
