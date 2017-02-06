@@ -11,15 +11,18 @@ import java.util.Date;
 @Table(name="RECORDS")
 public class Record {
 
-    @Column(name="ID")
+
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="ID")
     private long id;
 
     @Column(name="USERNAME")
     private String username;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="ACTION")
-    private String action;
+    private Action action;
 
     @Column(name="MESSAGE")
     private String message;
@@ -48,11 +51,11 @@ public class Record {
         this.username = username;
     }
 
-    public String getAction() {
+    public Action getAction() {
         return action;
     }
 
-    public void setAction(String action) {
+    public void setAction(Action action) {
         this.action = action;
     }
 

@@ -1,5 +1,6 @@
 package ru.siblion.nesterov.client.managing;
 
+import ru.siblion.nesterov.client.type.Action;
 import ru.siblion.nesterov.client.type.Record;
 
 import javax.annotation.PostConstruct;
@@ -18,7 +19,7 @@ public class RecordsManager {
     @PersistenceContext(unitName = "client")
     private EntityManager entityManager;
 
-    public void addRecord(String username, String action, String message, Date date) {
+    public void addRecord(String username, Action action, String message, Date date) {
         Record record = new Record();
         record.setUsername(username);
         record.setAction(action);
