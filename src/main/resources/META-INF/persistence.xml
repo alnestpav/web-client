@@ -7,8 +7,6 @@
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/client"/>
-
-            <!-- EclipseLink should create the database schema automatically -->
             <property name="eclipselink.deploy-on-startup" value="true" />
             <property name="eclipselink.ddl-generation" value="create-tables" />
             <property name="eclipselink.ddl-generation.output-mode" value="database" />

@@ -56,41 +56,31 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("POST");
+
+        Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
+        Role userRole = getUserRole(request);
+        /* Определяет набор типов локации, которые будут видны в select */
+        Set<LocationType> locationTypeSet = roles.get(getUserRole(request));
+        request.setAttribute("locationTypeSet", locationTypeSet);
+
+
         String string = request.getParameter("string");
         String location = request.getParameter("location");
         String fileFormatString = request.getParameter("fileFormat");
         String locationTypeString = request.getParameter("locationType");
-
         String[] dateFromStrings = request.getParameterValues("dateFrom");
         String[] dateToStrings = request.getParameterValues("dateTo");
-
-
-        System.out.println(string);
-        System.out.println(location);
-        System.out.println(locationTypeString);
-        System.out.println(Arrays.toString(dateFromStrings));
-        System.out.println(Arrays.toString(dateToStrings));
-        System.out.println(fileFormatString);
 
         clientLogger.log(request.getRemoteUser(), Action.SEARCH, "string: " + string + ", location: " + location);
 
         LocationType locationType = LocationType.fromValue(locationTypeString);
 
-
         /* Если роль пользователя не поддерживает выбранный тип локации поиска,
         *  то перенаправить его на страницу с сообщением об ошибке */
-        Role userRole = getUserRole(request);
-        Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
         if (!roles.get(userRole).contains(locationType)) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
             requestDispatcher.forward(request, response);
         }
-
-        /* Определяет набор типов локации, которые будут видны в select */
-        Set<LocationType> locationTypeSet = roles.get(getUserRole(request));
-        request.setAttribute("locationTypeSet", locationTypeSet);
-
 
         Request clientRequest = new Request();
         clientRequest.setString(string);
