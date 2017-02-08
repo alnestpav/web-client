@@ -31,6 +31,4 @@ public class SignoutServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-
-
 }

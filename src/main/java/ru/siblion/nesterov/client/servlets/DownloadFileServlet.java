@@ -32,6 +32,8 @@ public class DownloadFileServlet extends HttpServlet {
         BufferedInputStream inStream = new BufferedInputStream(url.openStream());
 
         OutputStream outStream = response.getOutputStream();
+        response.setContentType("application/force-download");
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 
         byte[] buffer = new byte[4096];
         int bytesRead = -1;

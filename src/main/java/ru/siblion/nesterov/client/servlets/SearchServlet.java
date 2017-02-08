@@ -132,7 +132,7 @@ public class SearchServlet extends HttpServlet {
 
 
         SoapWebService service = new SoapWebServiceService().getSoapWebServicePort();
-        Response clientResponse = service.getListOfLogMessages(clientRequest);
+        Response clientResponse = service.getResponse(clientRequest);
 
         List<LogMessage> logMessages = clientResponse.getLogMessages();
         String outputFile = (String) clientResponse.getOutputFile();
