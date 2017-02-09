@@ -2,6 +2,25 @@
  * Created by alexander on 18.01.2017.
  */
 
+
+/* Функция при загрузке страницы устанавливает цветовую схему, которую ранее выбрал пользователь,
+*  блокирует доступ и изменение текстового поля Location name, если выбран поиск по домену */
+window.onload = function() {
+    // Получение данных из localStorage
+    var color = localStorage.getItem('color');
+    if (color != null) {
+        document.body.style.background = color;
+    }
+
+    var locationInput = document.getElementById("locationInput");
+    if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "DOMAIN") {
+        locationInput.disabled = true;
+    } else {
+        locationInput.disabled = false;
+    }
+}
+
+/* Функция добавляет на страницу очередную форму для ввода интвервала дат */
 document.getElementById("addDateIntervalButton").onclick = function() {
     var dateIntervalsDiv = document.getElementById("dateIntervalsDiv");
     var numberOfDateIntervals = dateIntervalsDiv.childElementCount;
@@ -70,15 +89,13 @@ document.getElementById("addDateIntervalButton").onclick = function() {
 
     removeDateIntervalButtonDiv.appendChild(removeDateIntervalButton);
 
-
     dateIntervalDiv.appendChild(removeDateIntervalButtonDiv);
     document.getElementById("dateIntervalsDiv").appendChild(dateIntervalDiv);
 
-
-
 }
 
-
+/* Функция устанавливает цветовую схему страницы в соотвествии с выбранных пользователем цветом
+    и сохраняет ее в сессии, при выборе розового цвета показывает ошибку,  */
 document.getElementById("setColor").onclick = function() {
     color = document.getElementById("colorInput").value;
 
@@ -88,8 +105,6 @@ document.getElementById("setColor").onclick = function() {
     var h = hslColor[0]*360;
     var s = hslColor[1];
     var v = hslColor[2];
-
-    //alert("h " + h + " s " + s + " v " + v);
 
     if (
         ((h < 10 || h > 345) && s > 0.7 && v > 0.6 && v < 0.97) ||
@@ -137,24 +152,7 @@ function rgbToHsl(r, g, b){
 
 
 var locationTypeSelect = document.getElementById("locationTypeSelect");
-
-
-window.onload = function() {
-    // Получение данных из localStorage
-    var color = localStorage.getItem('color');
-    if (color != null) {
-        document.body.style.background = color;
-    }
-
-    var locationInput = document.getElementById("locationInput");
-    if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "DOMAIN") {
-        locationInput.disabled = true;
-    } else {
-        locationInput.disabled = false;
-    }
-}
-
-
+/* Функция блокирует доступ и изменение текстового поля Location name, если выбран поиск по домену*/
 locationTypeSelect.onchange = function() {
     var locationInput = document.getElementById("locationInput");
     if (locationTypeSelect.options[locationTypeSelect.selectedIndex].text == "DOMAIN") {
@@ -164,17 +162,18 @@ locationTypeSelect.onchange = function() {
     }
 }
 
-
+/* Функция блокирует доступ и изменение текстового поля Location name, при сбросе формы */
 document.getElementById("resetButton").onclick = function() {
     var locationInput = document.getElementById("locationInput");
     locationInput.disabled = true;
 }
 
-
+/* Функция обнуляет параметр сессии, отвечающий за цветовую схему, при выходе пользователя */
 document.getElementById("signoutButton").onclick = function() {
     localStorage.setItem('color', null);
 }
 
+/* Функция удаляет данную форму для ввода интвервала дат */
 function removeDateInterval() {
     var dateIntervalsDiv = document.getElementById("dateIntervalsDiv");
     var numberOfDateIntervals = dateIntervalsDiv.childElementCount;
