@@ -26,14 +26,14 @@ public class DownloadFileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-        String fileName = URLEncoder.encode(request.getParameter("fileName"), "UTF-8"); // сохраняет знак плюс "+"
+        String fileName = URLEncoder.encode(request.getParameter("fileName"), "UTF-8"); // сохраняет знак плюс в utl "+"
 
         URL url = new URL(DOWNLOAD_PATH + fileName);
         clientLogger.log(request.getRemoteUser(), Action.DOWNLOAD, "filename: " + fileName);
         BufferedInputStream inStream = new BufferedInputStream(url.openStream());
 
         OutputStream outStream = response.getOutputStream();
-        response.setContentType("application/force-download");
+        response.setContentType("application/force-download"); // делает так, чтобы файл скачивался, а не открывался в браузере
         response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 
         byte[] buffer = new byte[4096];

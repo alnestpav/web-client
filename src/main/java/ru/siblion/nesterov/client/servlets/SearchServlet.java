@@ -57,13 +57,6 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
-        Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
-        Role userRole = getUserRole(request);
-        /* Определяет набор типов локации, которые будут видны в select */
-        Set<LocationType> locationTypeSet = roles.get(getUserRole(request));
-        request.setAttribute("locationTypeSet", locationTypeSet);
-
-
         String string = request.getParameter("string");
         String location = request.getParameter("location");
         String fileFormatString = request.getParameter("fileFormat");
@@ -77,6 +70,8 @@ public class SearchServlet extends HttpServlet {
 
         /* Если роль пользователя не поддерживает выбранный тип локации поиска,
         *  то перенаправить его на страницу с сообщением об ошибке */
+        Role userRole = getUserRole(request);
+        Map<Role, Set<LocationType>> roles = new RoleManager().getRoles();
         if (!roles.get(userRole).contains(locationType)) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
             requestDispatcher.forward(request, response);
@@ -143,6 +138,10 @@ public class SearchServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+
+        /* Определяет набор типов локации, которые будут видны в select */
+        Set<LocationType> locationTypeSet = roles.get(getUserRole(request));
+        request.setAttribute("locationTypeSet", locationTypeSet);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);

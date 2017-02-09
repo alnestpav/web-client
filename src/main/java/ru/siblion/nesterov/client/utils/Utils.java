@@ -11,6 +11,8 @@ import java.util.GregorianCalendar;
 /**
  * Created by alexander on 02.02.2017.
  */
+
+/* Класс, предоставляющий вспомогательные методы для других классов */
 public class Utils {
 
     public static XMLGregorianCalendar stringToXMLGregorianCalendar(DatatypeFactory datatypeFactoryInstance, String stringDate) {

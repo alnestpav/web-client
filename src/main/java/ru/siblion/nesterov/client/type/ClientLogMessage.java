@@ -7,10 +7,10 @@ import java.util.Date;
  * Created by rnaway on 05.02.2017.
  */
 
+/* Класс, определяющий сущность лог сообщения, которое записывается в базу данных */
 @Entity
 @Table(name="RECORDS")
 public class ClientLogMessage {
-
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -31,9 +31,7 @@ public class ClientLogMessage {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    public ClientLogMessage() {
-
-    }
+    public ClientLogMessage() {}
 
     public long getId() {
         return id;

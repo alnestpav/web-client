@@ -12,6 +12,8 @@ import java.util.Date;
 /**
  * Created by rnaway on 05.02.2017.
  */
+
+/* Класс предназначен для журналирования действий пользователя в базу данных */
 @Stateless
 public class ClientLogger {
     @PersistenceContext(unitName = "client")
@@ -20,10 +22,12 @@ public class ClientLogger {
     @Asynchronous
     public void log(String username, Action action, String message) {
         ClientLogMessage clientLogMessage = new ClientLogMessage();
+
         clientLogMessage.setUsername(username);
         clientLogMessage.setAction(action);
         clientLogMessage.setMessage(message);
         clientLogMessage.setDate(new Date());
+
         entityManager.persist(clientLogMessage);
     }
 }
